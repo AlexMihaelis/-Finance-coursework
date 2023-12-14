@@ -52,4 +52,19 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="View\AddExpensesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\AddIncomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\ExpensesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\IncomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

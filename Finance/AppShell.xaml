@@ -4,11 +4,18 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Finance"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Disabled"
+    Shell.BackgroundColor="#388C45"
+    Shell.TabBarBackgroundColor="#388C45"
+    Shell.TabBarTitleColor="#3E3D3D"
+    Shell.TabBarUnselectedColor="#E6E6E6">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+
+    <TabBar Title="Finance">
+        <ShellContent Title="Расходы"
+                ContentTemplate="{DataTemplate local:View.ExpensesPage}"/>
+        <ShellContent Title="Доходы"
+                ContentTemplate="{DataTemplate local:View.IncomePage}"/>
+    </TabBar>
 
 </Shell>

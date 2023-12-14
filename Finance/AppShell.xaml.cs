@@ -1,4 +1,6 @@
-﻿namespace Finance
+﻿using Microsoft.Maui.Controls.Platform;
+
+namespace Finance
 {
     public partial class AppShell : Shell
     {
@@ -6,5 +8,6 @@
         {
             InitializeComponent();
         }
+
     }
 }

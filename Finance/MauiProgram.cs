@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Finance.Servises;
+using Finance.Servises.Implementations;
+using Finance.Servises.Interfaces;
+using Finance.View;
+using Microsoft.Extensions.Logging;
 
 namespace Finance
 {
@@ -14,6 +18,9 @@ namespace Finance
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            builder.Services.AddScoped<ExpensesPage>();
+            builder.Services.AddSingleton<ICategoryServise, CategoryServise>();
+            builder.Services.AddSingleton<IMyBudgetServise, MyBudgetService>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
