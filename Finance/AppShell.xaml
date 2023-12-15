@@ -13,8 +13,10 @@
 
     <TabBar Title="Finance">
         <ShellContent Title="Расходы"
+                      Icon="usdcircle.png"
                 ContentTemplate="{DataTemplate local:View.ExpensesPage}"/>
         <ShellContent Title="Доходы"
+                      Icon="piggybank.png"
                 ContentTemplate="{DataTemplate local:View.IncomePage}"/>
     </TabBar>
 

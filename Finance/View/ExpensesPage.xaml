@@ -4,7 +4,7 @@
              xmlns:m="clr-namespace:Finance.Models"
              x:Class="Finance.View.ExpensesPage"
              BackgroundImageSource="mobilebackground.png"
-             Title=" ">
+             Title="Расходы">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="Button1" TargetType="Button">
@@ -15,27 +15,12 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <!--Расходы-->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="plus.png"/>
-    </ContentPage.ToolbarItems>
-    <Grid RowDefinitions="*,auto">
-        <!--<Grid BackgroundColor="#388C45" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                --><!--Кнопки--><!--
-
-            </Grid.ColumnDefinitions>
-        </Grid>-->
-
+    <Grid RowDefinitions="*,80">
         <Grid x:Name="ExpensesGrid"
               Grid.Row="0"
-              RowDefinitions="auto,*,*"
-                  RowSpacing="15"
+              RowDefinitions="auto,auto,auto"
+                  RowSpacing="5"
                   Padding="30,25,30,15">
-            <!-- General information. -->
             <Border StrokeThickness="0" StrokeShape="RoundRectangle 25" BackgroundColor="#388C45">
                 <Border.Shadow>
                     <Shadow Radius="60" Opacity="0.2" />
@@ -63,31 +48,32 @@
             </Border>
 
             <StackLayout Grid.Row="2">
-                <ListView x:Name="OperationListView">
-                    <ListView.ItemTemplate>
+                <CollectionView x:Name="OperationListView">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="m:Operation">
-                            <ViewCell>
-                                <Border StrokeThickness="0" StrokeShape="RoundRectangle 25" BackgroundColor="#388C45" HeightRequest="40">
-                                    <Border.Shadow>
-                                        <Shadow Radius="60" Opacity="0.2" />
-                                    </Border.Shadow>
-                                    <Grid ColumnDefinitions="auto,*,auto,auto" Padding="10,6">
-                                        <Image Source="{Binding Category.Image}" Grid.Column="0" Aspect="AspectFit"/>
-                                        <Label Text="{Binding Category.Name}" Grid.Column="1" VerticalTextAlignment="Center" FontSize="16" TextColor="#E6E6E6" Padding="5,0"/>
-                                        <Label Text="{Binding Cost}" Grid.Column="2" VerticalTextAlignment="Center" FontSize="18" TextColor="#E6E6E6"/>
-                                        <Image Source="rublesign.png" Grid.Column="3"/>
-                                    </Grid>
-                                </Border>
-                            </ViewCell>
+                            <Border StrokeThickness="0" StrokeShape="RoundRectangle 25" BackgroundColor="#388C45" HeightRequest="40">
+                                <Border.GestureRecognizers>
+                                    <SwipeGestureRecognizer Direction="Left" Swiped="RemoveOperation" />
+                                </Border.GestureRecognizers>
+                                <Border.Shadow>
+                                    <Shadow Radius="60" Opacity="0.2" />
+                                </Border.Shadow>
+                                <Grid ColumnDefinitions="auto,*,auto,auto" Padding="10,6">
+                                    <Image Source="{Binding Category.Image}" Grid.Column="0" Aspect="AspectFit"/>
+                                    <Label Text="{Binding Category.Name}" Grid.Column="1" VerticalTextAlignment="Center" FontSize="16" TextColor="#E6E6E6" Padding="5,0"/>
+                                    <Label Text="{Binding Cost}" Grid.Column="2" VerticalTextAlignment="Center" FontSize="18" TextColor="#E6E6E6"/>
+                                    <Image Source="rublesign.png" Grid.Column="3"/>
+                                </Grid>
+                            </Border>
                         </DataTemplate>
                         
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
                 
             </StackLayout>
         </Grid>
 
-        <VerticalStackLayout x:Name="AddExpensesGrid" 
+        <VerticalStackLayout x:Name="AddExpensesGrid"
                              Margin="10"
                               IsVisible="False"
                               Grid.Row="0"
@@ -98,10 +84,12 @@
                 </Border.Shadow>
                 <Grid ColumnDefinitions="*,*" Padding="5">
                     <Entry x:Name="AddExpensesEntry" Grid.Column="0"
-                           Keyboard="Numeric"/>
+                           Keyboard="Numeric"
+                           TextColor="#E6E6E6"
+                           FontSize="24"/>
                     <Label Grid.Column="1" Text="РУБ" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
                            FontSize="24"
-                           TextColor="White"/>
+                           TextColor="#E6E6E6"/>
                 </Grid>
             </Border>
 
@@ -111,19 +99,32 @@
                 </Border.Shadow>
                 <Grid RowDefinitions="auto,*">
                     <Label Grid.Row="0" Text="Категории" 
+                           TextColor="#E6E6E6"
+                           FontSize="24"
                            VerticalTextAlignment="Center" 
                            HorizontalTextAlignment="Center"
                            Padding="5"/>
 
-                    <ListView Grid.Row="1" x:Name="CategoryListView" SelectionMode="Single">
-                        <ListView.ItemTemplate>
+                    <CollectionView Grid.Row="1" 
+                                    x:Name="CategoryListView" 
+                                    SelectionMode="Single"
+                                    Margin="15">
+                        <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="m:Category">
-                                <ViewCell>
-                                    <Image Source="{Binding Image}" />
-                                </ViewCell>
+                                <Grid RowDefinitions="*,auto"
+                                      HeightRequest="70"
+                                      Padding="0">
+                                    <Image Grid.Row="0" Aspect="AspectFit" Source="{Binding Image}" Margin="2"/>
+                                    <Label Grid.Row="1" Text="{Binding Name}" HorizontalTextAlignment="Center"
+                                           TextColor="#E6E6E6"
+                                           FontSize="12"/>
+                                </Grid>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="4" />
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
                 </Grid>
             </Border>
 
@@ -131,7 +132,12 @@
                 <Border.Shadow>
                     <Shadow Radius="60" Opacity="0.2" />
                 </Border.Shadow>
-                <DatePicker x:Name="AddExpensesDatePicker" Margin="10" />
+                <Grid ColumnDefinitions="*, auto"
+                      HeightRequest="70"
+                      Padding="0">
+                    <DatePicker x:Name="AddExpensesDatePicker" Margin="10" TextColor="#E6E6E6" FontSize="16" Grid.Column="0"/>
+                    <Image Aspect="AspectFit" Source="calendardays.png" Grid.Column="1" Margin="15"/>
+                </Grid>
             </Border>
 
             <Border StrokeThickness="0" StrokeShape="RoundRectangle 25" BackgroundColor="#388C45">
@@ -151,11 +157,22 @@
         </VerticalStackLayout>
 
         <Grid x:Name="GoAddExpenseGrid" Grid.Row="1">
-            <Button Clicked="GoAddExpense" Text="Добавить" Style="{StaticResource Button1}" />
+            <Border Margin="15" StrokeThickness="0" StrokeShape="RoundRectangle 25" BackgroundColor="#388C45">
+                <Border.Shadow>
+                    <Shadow Radius="60" Opacity="0.2" />
+                </Border.Shadow>
+                <Button Clicked="GoAddExpense" Text="Добавить" Style="{StaticResource Button1}" />
+            </Border>
         </Grid>
 
         <Grid x:Name="GoMainGrid" IsVisible="False" Grid.Row="1">
-            <Button Clicked="GoMainExpense" Text="Назад" Style="{StaticResource Button1}" />
+            <Border Margin="15" StrokeThickness="0" StrokeShape="RoundRectangle 25" BackgroundColor="#388C45">
+                <Border.Shadow>
+                    <Shadow Radius="60" Opacity="0.2" />
+                </Border.Shadow>
+                <Button Clicked="GoMainExpense" Text="Назад" Style="{StaticResource Button1}" />
+            </Border>
         </Grid>
+        
     </Grid>
 </ContentPage>

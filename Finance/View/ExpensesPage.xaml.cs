@@ -87,6 +87,8 @@ public partial class ExpensesPage : ContentPage
 
         var newOperation = new Operation((Category)CategoryListView.SelectedItem, decimal.Parse(AddExpensesEntry.Text), AddExpensesDatePicker.Date);
         _myBudgetServise.CreateOperation(newOperation);
+        AddExpensesEntry.IsEnabled = false;
+        AddExpensesEntry.IsEnabled = true;
         GoMain();
     }
 
@@ -111,6 +113,7 @@ public partial class ExpensesPage : ContentPage
 
     private void GoMain()
     {
+        AddExpensesEntry.Text = "";
         ExpensesGrid.IsVisible = true;
         AddExpensesGrid.IsVisible = false;
         GoMainGrid.IsVisible = false;
@@ -129,7 +132,15 @@ public partial class ExpensesPage : ContentPage
 
     private void RemoveOperation(object sender, SwipedEventArgs e)
     {
-        
+        var border = (Border)sender;
+
+        border.TranslateTo(-500, 0, easing: Easing.Linear)
+            .ContinueWith(x =>
+            {
+                var a = (Operation)border.BindingContext;
+                _myBudgetServise.RemoveOperation(a);
+                MainThread.BeginInvokeOnMainThread(() => OnAppearing());
+            });
     }
 
     private void GoAddExpense(object sender, EventArgs e)

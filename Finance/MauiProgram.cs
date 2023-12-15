@@ -19,6 +19,7 @@ namespace Finance
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
             builder.Services.AddScoped<ExpensesPage>();
+            builder.Services.AddScoped<IncomePage>();
             builder.Services.AddSingleton<ICategoryServise, CategoryServise>();
             builder.Services.AddSingleton<IMyBudgetServise, MyBudgetService>();
 
