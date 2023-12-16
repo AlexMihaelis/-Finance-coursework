@@ -12,4 +12,4 @@
 ![ds](/docs/Finance.PNG)
 
 Просмотр макета подробнее:
-https://miro.com/welcomeonboard/ekRXMFFYUDF3c3dybzA1dUNzNzBJaFdQVEFrOUp4U2hBYTFZcG0yR1lqWVZPcDdyV1VueVdkeE9tRUFKTmtyUnwzNDU4NzY0NTQwNDc4MzMzMzkwfDI=?share_link_id=455657994693
+https://miro.com/welcomeonboard/ekRXMFFYUDF3c3dybzA1dUNzNzBJaFdQVEFrOUp4U2hBYTFZcG0yR1lqWVZPcDdyV1VueVdkeE9tRUFKTmtyUnwzNDU4NzY0NTQwNDc4MzMzMzkwfDI=?share_link_id=783098279661Ы

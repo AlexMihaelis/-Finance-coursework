@@ -5,6 +5,7 @@
              x:Class="Finance.View.ExpensesPage"
              BackgroundImageSource="mobilebackground.png"
              Title="Расходы">
+    <!--Добавляем стиль кнопок, чтобы не загружать код-->
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="Button1" TargetType="Button">
@@ -14,7 +15,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <!--Расходы-->
+        <!--Расходы-->
     <Grid RowDefinitions="*,80">
         <Grid x:Name="ExpensesGrid"
               Grid.Row="0"
@@ -66,13 +67,12 @@
                                 </Grid>
                             </Border>
                         </DataTemplate>
-                        
+
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                
             </StackLayout>
         </Grid>
-
+        <!--Блок добавления, который становится видимым при нажатии на кнопку "Добавит". Соответственно предыдущий блок становится невидимым.-->
         <VerticalStackLayout x:Name="AddExpensesGrid"
                              Margin="10"
                               IsVisible="False"
@@ -148,7 +148,7 @@
                         Padding="25"
                         Style="{StaticResource Button1}" />
             </Border>
-
+        <!--Высвечивает сообщение об ошибке, если не соблюдены требования-->
             <Label x:Name="ValidateLabel" Text="Ошибка" 
                    HorizontalTextAlignment="Center"
                    IsVisible="False"
@@ -173,6 +173,5 @@
                 <Button Clicked="GoMainExpense" Text="Назад" Style="{StaticResource Button1}" />
             </Border>
         </Grid>
-        
     </Grid>
 </ContentPage>
